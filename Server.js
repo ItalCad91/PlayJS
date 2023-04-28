@@ -1,5 +1,5 @@
 import express from "express"; 
-import router from './App/Routes/index.routes.server.js' 
+import router from './app/Routes/index.routes.server.js' 
 import logger from "morgan";
 import session from "express-session";
 import bodyParser from "body-parser";
