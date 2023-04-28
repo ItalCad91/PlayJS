@@ -31,7 +31,7 @@ app.use(session({
     resave: false
 }));
 
-
+import { Secret} from '../config/config.js';
 
 
 //IMPORT ROUTES

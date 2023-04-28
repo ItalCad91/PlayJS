@@ -1,35 +1,80 @@
-import express from "express"; 
-import router from './app/Routes/index.routes.server.js' 
-import logger from "morgan";
-import session from "express-session";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-
-// Instantiate Express Application
-const app = express();
-
-//ES MODULES FIX FOR __DIRNAME
-import { fileURLToPath } from "url";
-import path, {dirname} from "path";
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-
-//Setting up views Middlewares
-app.set('view engine', "ejs");
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({extended : false}));
-app.set('views', path.join(__dirname, '/app/Views'));
-
-//More Middlewares
-app.use(express.static(path.join(__dirname,'/public'))); //Here we are saying that everything under public folder are static files, which means they are on the client side.
-app.use(session({
-                 secret: 'Mysecret',
-                 saveUninitialized: false,
-                 resave: false
-               }))
+// Author:Riccardo Reali
+// Date: 15-02-2023
+     
+     
+     
+import debug from 'debug';
+debug('DMS');
 
 
 
-app.use('/', router); 
-app.listen(3000);
+import http from 'http';
+
+
+
+import app from './app/app.js';
+
+
+const PORT = normalizePort(process.env.PORT || 3000);
+
+app.set('port', PORT);
+
+const server = http.createServer(app);
+
+
+server.listen(PORT);
+
+
+server.on('error', onError);
+
+
+server.on('listening', onListening);
+
+
+function normalizePort(val) 
+{
+    var port = parseInt(val, 10);
+    if (isNaN(port)) 
+    {
+        return val;
+    }
+    if (port >= 0) 
+    {
+        return port;
+    }
+    return false;
+}
+
+
+function onError(error) 
+{
+    if (error.syscall !== 'listen') 
+    {
+        throw error;
+    }
+    let bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port;
+
+
+switch (error.code) 
+{
+    case 'EACCES':
+        console.error(bind + ' requires elevated privileges');
+        process.exit(1);
+        break;
+    case 'EADDRINUSE':
+        console.error(bind + ' is already in use');
+        process.exit(1);
+        break;
+    default:
+        throw error;
+}
+}
+
+function onListening() 
+{
+let addr = server.address();
+let bind = 'pipe ' + addr;
+debug('Listening on ' + bind);
+}
