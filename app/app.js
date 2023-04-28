@@ -24,7 +24,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname,'../public'))); // This makes the contents of the "public" directory in your project's directory accessible to the client-side.
+app.use(express.static(path.join(__dirname,'../Public'))); // This makes the contents of the "public" directory in your project's directory accessible to the client-side.
 app.use(session({
     secret: Secret,
     saveUninitialized: false, 
