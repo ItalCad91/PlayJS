@@ -5,10 +5,11 @@
     font-family: 'Press Start 2P', sans-serif;
 }
 
-.homeIMG
-{
+
+
+.homeIMG {
     display: block;
     margin: 0 auto;
     width: 650px;
     height: 650px;
-}
+  }
